@@ -23,7 +23,7 @@ Three common options for data storage are text files, spreadsheets, and database
 
 When we are using a spreadsheet, we put formulas into cells to calculate new values based on old ones.  When we are using a database, we send commands (usually called [queries]({% link reference.md %}#query)) to a [database manager]({% link reference.md %}#database-manager): a program that manipulates the database for us.  The database manager does whatever lookups and calculations the query specifies, returning the results in a tabular form that we can then use as a starting point for further queries.
 
-![Database  Manager](fig/DBMS.PNG "Conceptual Overview of Database Manager")
+![Database  Manager](../fig/DBMS.PNG "Conceptual Overview of Database Manager")
 
 Queries are written in a language called [SQL]({% link reference.md %}#sql), which stands for "Structured Query Language".
 SQL provides hundreds of different ways to analyze and recombine data.  We will only look at a handful of queries, but that handful accounts for most of what scientists do.
@@ -32,7 +32,7 @@ The three major ways to model databases are [*relational*](https://en.wikipedia.
 
 Within a [relational database]({{ site.github.url }}/reference/#relational-database) the data is arranged into [tables]({{ site.github.url }}/reference/#table). Each table has columns (also known as [fields]({{ site.github.url }}/reference/#field)) that describe the data, and rows (also known as [records]({{ site.github.url }}/reference/#record)) which contain the data.
 
-![Relational Database](fig/RelationalDB.PNG "Conceptual Overview of Structure of a Relational Database")
+![Relational Database](../fig/RelationalDB.PNG "Conceptual Overview of Structure of a Relational Database")
 
 > ## Changing Database Managers
 >
@@ -53,7 +53,7 @@ Key points when moving towards structured data that you wish to move into a data
 
 - Follow the data normalization rules as best as possible to create modular, non-redundant data. A good, lay discussion can be found at Software Carpentry's [Data Hygiene lesson](http://swcarpentry.github.io/sql-novice-survey/08-hygiene/).
 
-![Data  Normalization](fig/Normalization.PNG "Conceptual Overview of Data Normalization Process")
+![Data  Normalization](../fig/Normalization.PNG "Conceptual Overview of Data Normalization Process")
 
 ## SQLite
 
@@ -62,7 +62,7 @@ The Database engine we will be using today is **[SQLite](https://sqlite.org/abou
 
 **Our data:** In the late 1920s and early 1930s, William Dyer, Frank Pabodie, and Valentina Roerich led expeditions to the Pole of Inaccessibility in the South Pacific, and then onward to Antarctica. Two years ago, their expeditions were found in a storage locker at Miskatonic University. We have scanned and OCR the data they contain, and we now want to store that information in a way that will make search and analysis easy.
 
-![Our Data](fig/PoleofInaccessibility.PNG "Where did our data come from")
+![Our Data](../fig/PoleofInaccessibility.PNG "Where did our data come from")
 
 Before we get into using SQLite to select the data, let's take a look at the tables of the database we will use in our examples:
 
