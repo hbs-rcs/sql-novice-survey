@@ -15,28 +15,24 @@ keypoints:
 - "Use SELECT... FROM... to get values from a database table."
 - "SQL is case-insensitive (but data is case-sensitive)."
 ---
-A [relational database]({% link reference.md %}#relational-database)
-is a way to store and manipulate information.
-Databases are arranged as [tables]({% link reference.md %}#table).
-Each table has columns (also known as [fields]({% link reference.md %}#fields)) that describe the data,
-and rows (also known as [records]({% link reference.md %}#record)) which contain the data.
+## Review of structured data and advantage of database systems
 
-When we are using a spreadsheet,
-we put formulas into cells to calculate new values based on old ones.
-When we are using a database,
-we send commands
-(usually called [queries]({% link reference.md %}#query))
-to a [database manager]({% link reference.md %}#database-manager):
-a program that manipulates the database for us.
-The database manager does whatever lookups and calculations the query specifies,
-returning the results in a tabular form
-that we can then use as a starting point for further queries.
+A database is a construct for data storage; it can be specifically designed for a certain data type, or it can be more generic. We don't see these as often, but library indices and telephone directories are some examples of databases we can hold. Computer-based databases are more of the norm now, and are also what we will be discussing today.
 
-Queries are written in a language called [SQL]({% link reference.md %}#sql),
-which stands for "Structured Query Language".
-SQL provides hundreds of different ways to analyze and recombine data.
-We will only look at a handful of queries,
-but that handful accounts for most of what scientists do.
+Three common options for data storage are text files, spreadsheets, and databases. Text files are easiest to create, and work well with version control, but then we would have to build search and analysis tools ourselves. Spreadsheets are good for doing simple analyses, but they don’t handle large or complex data sets well. Databases, however, include powerful tools for search and analysis, and can handle large, complex data sets.
+
+When we are using a spreadsheet, we put formulas into cells to calculate new values based on old ones.  When we are using a database, we send commands (usually called [queries]({% link reference.md %}#query)) to a [database manager]({% link reference.md %}#database-manager): a program that manipulates the database for us.  The database manager does whatever lookups and calculations the query specifies, returning the results in a tabular form that we can then use as a starting point for further queries.
+
+![Database  Manager](images/DBMS.PNG "Conceptual Overview of Database Manager")
+
+Queries are written in a language called [SQL]({% link reference.md %}#sql), which stands for "Structured Query Language".
+SQL provides hundreds of different ways to analyze and recombine data.  We will only look at a handful of queries, but that handful accounts for most of what scientists do.
+
+The three major ways to model databases are [*relational*](https://en.wikipedia.org/wiki/Relational_model), [*heirarchical*](https://en.wikipedia.org/wiki/Hierarchical_database_model) and [*network*](https://en.wikipedia.org/wiki/Network_model). The Relational model is the one that is most commonly employed and the resulting database is appropriately called a **Relational Database**.
+
+Within a [relational database]({{ site.github.url }}/reference/#relational-database) the data is arranged into [tables]({{ site.github.url }}/reference/#table). Each table has columns (also known as [fields]({{ site.github.url }}/reference/#field)) that describe the data, and rows (also known as [records]({{ site.github.url }}/reference/#record)) which contain the data.
+
+![Relational Database](images/RelationalDB.PNG "Conceptual Overview of Structure of a Relational Database")
 
 > ## Changing Database Managers
 >
@@ -49,25 +45,24 @@ but that handful accounts for most of what scientists do.
 > so it *is* possible to move information from one to another.
 {: .callout}
 
-> ## Getting Into and Out Of SQLite
->
-> In order to use the SQLite commands *interactively*, we need to
-> enter into the SQLite console.  So, open up a terminal, and run
->
-> ~~~
-> $ cd /path/to/survey/data/
-> $ sqlite3 survey.db
-> ~~~
-> {: .bash}
->
-> The SQLite command is `sqlite3` and you are telling SQLite to open up
-> the `survey.db`.  You need to specify the `.db` file, otherwise SQLite
-> will open up a temporary, empty database.
->
-> To get out of SQLite, type out `.exit` or `.quit`.  For some
-> terminals, `Ctrl-D` can also work.  If you forget any SQLite `.` (dot)
-> command, type `.help`.
-{: .callout}
+## Moving towards structured Data
+
+Key points when moving towards structured data that you wish to move into a database system:
+
+- Generate and use unique values (primary keys) for data in a given table. This primary key allows you to unique identify that row of data. This can be a unique, serial number (e.g. 1, 2, etc), a static # that is the row # upon data import, another value in a field (column), or a new field that is a combination of two values or fields that now creates a new value across all the table data.
+
+- Follow the data normalization rules as best as possible to create modular, non-redundant data. A good, lay discussion can be found at Software Carpentry's [Data Hygiene lesson](http://swcarpentry.github.io/sql-novice-survey/08-hygiene/).
+
+![Data  Normalization](images/Normalization.PNG "Conceptual Overview of Data Normalization Process")
+
+## SQLite
+
+The Database engine we will be using today is **[SQLite](https://sqlite.org/about.html)**. SQLite attempts to provide a Structured  Language Query (SQL) engine intended for data analysis/management "locally"; it is good at reading from, and writing directly to local files. Unlike other SQL engines like MySQL, Oracle, SQL server, etc., SQLite is not intended for high-volume websites or in the case where many "connections" need to be maintained simultaneously. [Here is a detailed overview of when it is appropriate to use SQLite](https://sqlite.org/whentouse.html). 
+
+
+**Our data:** In the late 1920s and early 1930s, William Dyer, Frank Pabodie, and Valentina Roerich led expeditions to the Pole of Inaccessibility in the South Pacific, and then onward to Antarctica. Two years ago, their expeditions were found in a storage locker at Miskatonic University. We have scanned and OCR the data they contain, and we now want to store that information in a way that will make search and analysis easy.
+
+![Our Data](images/PoleofInaccessibility.PNG "Where did our data come from")
 
 Before we get into using SQLite to select the data, let's take a look at the tables of the database we will use in our examples:
 
@@ -142,93 +137,35 @@ and two in the `Survey` table --- don't contain any actual
 data, but instead have a special `-null-` entry:
 we'll return to these missing values [later]({{ site.github.url }}/05-null/).
 
+> ## Getting Into and Out Of SQLite
+>
+> We'd like to introduce you to this handy tool, DB Brower for SQLite (https://sqlitebrowser.org/dl/).  DB Brower for SQLite gives us nice and quick overviews of our database and tables, and allows us to use the SQLite commands *interactively*.
+>  
 
-> ## Checking If Data is Available
->
-> On the shell command line,
-> change the working directory to the one where you saved `survey.db`.
-> If you saved it at your Desktop you should use
->
-> ~~~
-> $ cd Desktop
-> $ ls | grep survey.db
-> ~~~
-> {: .bash}
-> ~~~
-> survey.db
-> ~~~
-> {: .output}
->
-> If you get the same output, you can run
->
-> ~~~
-> $ sqlite3 survey.db
-> ~~~
-> {: .bash}
-> ~~~
-> SQLite version 3.8.8 2015-01-16 12:08:06
-> Enter ".help" for usage hints.
-> sqlite>
-> ~~~
-> {: .output}
->
-> that instructs SQLite to load the database in the `survey.db` file.
->
-> For a list of useful system commands, enter `.help`.
->
-> All SQLite-specific commands are prefixed with a `.` to distinguish them from SQL commands.
-> 
-> Type `.tables` to list the tables in the database.
->
-> ~~~
-> .tables
-> ~~~
-> {: .sql}
-> ~~~
-> Person   Site     Survey   Visited
-> ~~~
-> {: .output}
->
-> If you had the above tables, you might be curious what information was stored in each table.
-> To get more information on the tables, type `.schema` to see the SQL statements used to create the tables in the database.  The statements will have a list of the columns and the data types each column stores.
-> ~~~
-> .schema
-> ~~~
-> {: .sql}
-> ~~~
-> CREATE TABLE Person (id text, personal text, family text);
-> CREATE TABLE Site (name text, lat real, long real);
-> CREATE TABLE Survey (taken integer, person text, quant text, reading real);
-> CREATE TABLE Visited (id integer, site text, dated text);
-> ~~~
-> {: .output}
->
-> The output is formatted as <**columnName** *dataType*>.  Thus we can see from the first line that the table **Person** has three columns: 
-> * **id** with type _text_
-> * **personal** with type _text_
-> * **family** with type _text_
-> 
+Once you've downloaded DB Brower for SQLite for your operating system, you can open DB Brower and click Open Database.  Select our database, survey.db; and our database should pop up under the tab Database Structure. 
+
+Under the Database Structure tab you'll see that we have 4 tables in our database: 
+   Person, Site, Survey, Visited.
+
+The Schema column of this tab informs us about the structures of each table:
+ 
+  CREATE TABLE Person (id text, personal text, family text)
+ 
+  CREATE TABLE Site (name text, lat real, long real)
+ 
+  CREATE TABLE Survey (taken integer, person text, quant text, reading real)
+ 
+  CREATE TABLE Visited (id text, site text, dated text)
+
+The Browse Data tab provides view of each table.
+
+The Execute SQL tab is where we'll be entering and executing our SQL commands.
 > Note: The available data types vary based on the database manager - you can search online for what data types are supported.
->
-> You can change some SQLite settings to make the output easier to read.
-> First,
-> set the output mode to display left-aligned columns.
-> Then turn on the display of column headers.
->
-> ~~~
-> .mode column
-> .header on
-> ~~~
-> {: .sql}
->
-> To exit SQLite and return to the shell command line,
-> you can use either `.quit` or `.exit`.
-{: .callout}
 
-For now,
-let's write an SQL query that displays scientists' names.
-We do this using the SQL command `SELECT`,
-giving it the names of the columns we want and the table we want them from.
+## Selecting Data
+
+For now, let's write an SQL query that displays scientists' names.
+We do this using the SQL command `SELECT`, giving it the names of the columns we want and the table we want them from.
 Our query and its output look like this:
 
 ~~~
