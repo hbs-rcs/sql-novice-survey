@@ -59,7 +59,6 @@ Key points when moving towards structured data that you wish to move into a data
 
 The Database engine we will be using today is **[SQLite](https://sqlite.org/about.html)**. SQLite attempts to provide a Structured  Language Query (SQL) engine intended for data analysis/management "locally"; it is good at reading from, and writing directly to local files. Unlike other SQL engines like MySQL, Oracle, SQL server, etc., SQLite is not intended for high-volume websites or in the case where many "connections" need to be maintained simultaneously. [Here is a detailed overview of when it is appropriate to use SQLite](https://sqlite.org/whentouse.html). 
 
-
 **Our data:** In the late 1920s and early 1930s, William Dyer, Frank Pabodie, and Valentina Roerich led expeditions to the Pole of Inaccessibility in the South Pacific, and then onward to Antarctica. Two years ago, their expeditions were found in a storage locker at Miskatonic University. We have scanned and OCR the data they contain, and we now want to store that information in a way that will make search and analysis easy.
 
 ![Our Data](../fig/PoleofInaccessibility.PNG "Where did our data come from")
@@ -137,18 +136,17 @@ and two in the `Survey` table --- don't contain any actual
 data, but instead have a special `-null-` entry:
 we'll return to these missing values [later]({{ site.github.url }}/05-null/).
 
-> ## Getting Into and Out Of SQLite
->
-> We'd like to introduce you to this handy tool, DB Brower for SQLite (https://sqlitebrowser.org/dl/).  DB Brower for SQLite gives us nice and quick overviews of our database and tables, and allows us to use the SQLite commands *interactively*.
->  
+## Getting Into and Out Of SQLite
+
+## Using DB Brower
+We'd like to introduce you to this handy tool, DB Brower for SQLite (https://sqlitebrowser.org/dl/).  DB Brower for SQLite gives us nice and quick overviews of our database and tables, and allows us to use the SQLite commands *interactively*.
 
 Once you've downloaded DB Brower for SQLite for your operating system, you can open DB Brower and click Open Database.  Select our database, survey.db; and our database should pop up under the tab Database Structure. 
 
-Under the Database Structure tab you'll see that we have 4 tables in our database: 
-   Person, Site, Survey, Visited.
+Under the Database Structure tab you'll see that we have 4 tables in our database: Person, Site, Survey, Visited.
 
 The Schema column of this tab informs us about the structures of each table:
- 
+
   > CREATE TABLE Person (id text, personal text, family text)
  
   > CREATE TABLE Site (name text, lat real, long real)
@@ -161,6 +159,108 @@ The Browse Data tab provides view of each table.
 
 The Execute SQL tab is where we'll be entering and executing our SQL commands.
 > Note: The available data types vary based on the database manager - you can search online for what data types are supported.
+
+## Using SQLite3
+> In order to use the SQLite commands *interactively*, we need to
+> enter into the SQLite console.  So, open up a terminal, and run
+>
+> ~~~
+> $ cd /path/to/survey/data/
+> $ sqlite3 survey.db
+> ~~~
+> {: .bash}
+>
+> The SQLite command is `sqlite3` and you are telling SQLite to open up
+> the `survey.db`.  You need to specify the `.db` file, otherwise SQLite
+> will open up a temporary, empty database.
+>
+> To get out of SQLite, type out `.exit` or `.quit`.  For some
+> terminals, `Ctrl-D` can also work.  If you forget any SQLite `.` (dot)
+> command, type `.help`.
+{: .callout}
+
+> ## Checking If Data is Available
+>
+> On the shell command line,
+> change the working directory to the one where you saved `survey.db`.
+> If you saved it at your Desktop you should use
+>
+> ~~~
+> $ cd Desktop
+> $ ls | grep survey.db
+> ~~~
+> {: .bash}
+> ~~~
+> survey.db
+> ~~~
+> {: .output}
+>
+> If you get the same output, you can run
+>
+> ~~~
+> $ sqlite3 survey.db
+> ~~~
+> {: .bash}
+> ~~~
+> SQLite version 3.8.8 2015-01-16 12:08:06
+> Enter ".help" for usage hints.
+> sqlite>
+> ~~~
+> {: .output}
+>
+> that instructs SQLite to load the database in the `survey.db` file.
+>
+> For a list of useful system commands, enter `.help`.
+>
+> All SQLite-specific commands are prefixed with a `.` to distinguish them from SQL commands.
+> 
+> Type `.tables` to list the tables in the database.
+>
+> ~~~
+> .tables
+> ~~~
+> {: .sql}
+> ~~~
+> Person   Site     Survey   Visited
+> ~~~
+> {: .output}
+>
+> If you had the above tables, you might be curious what information was stored in each table.
+> To get more information on the tables, type `.schema` to see the SQL statements used to create the tables in the database.  The statements will have a list of the columns and the data types each column stores.
+> ~~~
+> .schema
+> ~~~
+> {: .sql}
+> ~~~
+> CREATE TABLE Person (id text, personal text, family text);
+> CREATE TABLE Site (name text, lat real, long real);
+> CREATE TABLE Survey (taken integer, person text, quant text, reading real);
+> CREATE TABLE Visited (id integer, site text, dated text);
+> ~~~
+> {: .output}
+>
+> The output is formatted as <**columnName** *dataType*>.  Thus we can see from the first line that the table **Person** has three columns: 
+> * **id** with type _text_
+> * **personal** with type _text_
+> * **family** with type _text_
+> 
+> Note: The available data types vary based on the database manager - you can search online for what data types are supported.
+>
+> You can change some SQLite settings to make the output easier to read.
+> First,
+> set the output mode to display left-aligned columns.
+> Then turn on the display of column headers.
+>
+> ~~~
+> .mode column
+> .header on
+> ~~~
+> {: .sql}
+>
+> To exit SQLite and return to the shell command line,
+> you can use either `.quit` or `.exit`.
+{: .callout}
+
 
 ## Selecting Data
 
