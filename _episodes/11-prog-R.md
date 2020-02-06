@@ -263,5 +263,141 @@ And as always, remember to close the database connection when done!
 ~~~
 dbDisconnect(connection)
 ~~~
+
+We're going to try a different approach, one that does not use explicit SQL statements
+and instead uses the more natural syntax of R and dplyr. But we'll show you the comparisons:
+
+**R (standard)**
+You can download [`R_sqlite_dplyr.R`](https://raw.githubusercontent.com/hbs-rcs/datafest/master/DataFest-2020/Custom_Databases_for_Data_Management/scripts/R_sqlite_dplyr.R) to your local machine and put it in your `datafest/` folder.
+
+
+```r
+# let's ensure that we have the correct packages loaded
+install.packages(c("RSQLite", "dplyr", "dbplyr"))
+```
+
+If all goes well, we can proceed:
+
+```r
+# import our required packages
+library('RSQLite')
+
+# open the database connection
+connection <- dbConnect(SQLite(), "~/Desktop/survey.db")
+
+# execute and fetch the results
+results <- dbGetQuery(connection, "SELECT Site.lat, Site.long FROM Site;")
+
+# print 'em out
+print(results)
+
+# close the connection
+dbDisconnect(connection)
+```
+
+**R with dplyr**
+```r
+#
+# somewhat using dplyr
+# import our required packages
+library('RSQLite')
+library('dplyr')
+
+connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+
+# execute and fetch the results
+results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
+
+# print 'em out
+print(results)
+
+# close the connection
+dbDisconnect(connection)
+```
+
+**R with dplyr and dbplyr**
+```r
+## better examples
+# real dplyr with dbplyr
+#
+#
+library(dplyr)
+library(dbplyr)
+
+connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+src_dbi(connection)
+
+# sql
+results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
+results
+str(results)
+
+# dplyr
+sites <- tbl(connection, "Site")
+str(sites)
+
+sites %>% 
+  select(lat, long)
+sites
+
+sites %>% 
+  select(lat, long) %>%
+  show_query()
+  
+dbDisconnect(connection)
+
+
+# Simple query and filter
+# find readings out of range:
+# SELECT * FROM Survey WHERE quant = 'sal' AND ((reading > 1.0) OR (reading < 0.0));
+connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+src_dbi(connection)
+s
+urvey <- tbl(connection, "Survey")
+survey %>% 
+  select(person, quant, reading) %>% 
+  filter(quant == 'sal',
+         reading > 1 | reading < 0)
+
+# what did it do?
+survey %>% 
+  select(person, quant, reading) %>% 
+  filter(quant == 'sal',
+         reading > 1 | reading < 0) %>% 
+  show_query()
+
+# collect data
+salinity_readings <- survey %>% 
+  select(person, quant, reading) %>% 
+  filter(quant == 'sal',
+         reading > 1 | reading < 0)
+salinity_readings
+
+dbDisconnect(connection)
+
+
+# do a join
+# SELECT * FROM Visited JOIN Survey ON Survey.taken = Visited.id and person = "lake" ORDER BY quant ASC;
+
+library(dplyr)
+library(dbplyr)
+
+connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+src_dbi(connection)
+
+survey <- tbl(connection, "Survey")
+both <- left_join(survey, tbl(connection, "Visited"),
+                   by = c("taken" = "id")) %>% 
+  filter(person == "lake") %>%
+  arrange(quant)
+both
+explain(both)
+
+dbDisconnect(connection)
+```
+
+We hope that you see that using native R dplyr syntax is much easier and more natural than
+explicit SQL queries for routine and lightweight work.
+
 {: .r}
 
