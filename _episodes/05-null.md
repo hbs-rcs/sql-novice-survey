@@ -41,7 +41,7 @@ SELECT * FROM Visited;
 ~~~
 {: .sql}
 
-|id   |site |dated     |
+|id   |site_id |dated     |
 |-----|-----|----------|
 |619  |DR-1 |1927-02-08|
 |622  |DR-1 |1927-02-10|
@@ -60,7 +60,7 @@ SELECT * FROM Visited WHERE dated < '1930-01-01';
 ~~~
 {: .sql}
 
-|id   |site|dated     |
+|id   |site_id|dated     |
 |-----|----|----------|
 |619  |DR-1|1927-02-08|
 |622  |DR-1|1927-02-10|
@@ -73,7 +73,7 @@ SELECT * FROM Visited WHERE dated >= '1930-01-01';
 ~~~
 {: .sql}
 
-|id   |site |dated     |
+|id   |site_id |dated     |
 |-----|-----|----------|
 |734  |DR-3 |1930-01-07|
 |735  |DR-3 |1930-01-12|
@@ -126,7 +126,7 @@ SELECT * FROM Visited WHERE dated IS NULL;
 ~~~
 {: .sql}
 
-|id   |site|dated     |
+|id   |site_id|dated     |
 |-----|----|----------|
 |752  |DR-3|-null-    |
 
@@ -137,7 +137,7 @@ SELECT * FROM Visited WHERE dated IS NOT NULL;
 ~~~
 {: .sql}
 
-|id   |site |dated     |
+|id   |site_id |dated     |
 |-----|-----|----------|
 |619  |DR-1 |1927-02-08|
 |622  |DR-1 |1927-02-10|
@@ -212,7 +212,7 @@ detail in [the next section]({{ site.github.url }}/06-agg/).
 > > ~~~
 > > {: .sql}
 > >
-> > |id        |site      |dated     |
+> > |id        |site_id      |dated     |
 > > |----------|----------|----------|
 > > |619       |DR-1      |1927-02-08|
 > > |622       |DR-1      |1927-02-10|

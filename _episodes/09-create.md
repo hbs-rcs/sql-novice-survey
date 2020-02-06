@@ -33,7 +33,7 @@ the following statements create the four tables in our survey database:
 ~~~
 CREATE TABLE Person(id text, personal text, family text);
 CREATE TABLE Site(name text, lat real, long real);
-CREATE TABLE Visited(id integer, site text, dated text);
+CREATE TABLE Visited(id integer, site_id text, dated text);
 CREATE TABLE Survey(visited_id integer, person_id text, quant text, reading real);
 ~~~
 {: .sql}

@@ -23,11 +23,11 @@ We can select these records from the `Visited` table
 by using a `WHERE` clause in our query:
 
 ~~~
-SELECT * FROM Visited WHERE site = 'DR-1';
+SELECT * FROM Visited WHERE site_id = 'DR-1';
 ~~~
 {: .sql}
 
-|id   |site|dated     |
+|id   |site_id|dated     |
 |-----|----|----------|
 |619  |DR-1|1927-02-08|
 |622  |DR-1|1927-02-10|
@@ -45,7 +45,7 @@ we can filter records using `WHERE`
 based on values in columns that aren't then displayed:
 
 ~~~
-SELECT id FROM Visited WHERE site = 'DR-1';
+SELECT id FROM Visited WHERE site_id = 'DR-1';
 ~~~
 {: .sql}
 
@@ -62,11 +62,11 @@ For example,
 we can ask for all information from the DR-1 site collected before 1930:
 
 ~~~
-SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
+SELECT * FROM Visited WHERE site_id = 'DR-1' AND dated < '1930-01-01';
 ~~~
 {: .sql}
 
-|id   |site|dated     |
+|id   |site_id|dated     |
 |-----|----|----------|
 |619  |DR-1|1927-02-08|
 |622  |DR-1|1927-02-10|
@@ -180,11 +180,11 @@ use the `LIKE` keyword.  The percent symbol acts as a
 place.  It can be used at the beginning, middle, or end of the string:
 
 ~~~
-SELECT * FROM Visited WHERE site LIKE 'DR%';
+SELECT * FROM Visited WHERE site_id LIKE 'DR%';
 ~~~
 {: .sql}
 
-|id   |site |dated     |
+|id   |site_id |dated     |
 |-----|-----|----------|
 |619  |DR-1 |1927-02-08|
 |622  |DR-1 |1927-02-10|

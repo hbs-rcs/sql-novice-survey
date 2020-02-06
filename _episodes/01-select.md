@@ -88,7 +88,7 @@ Before we get into using SQLite to select the data, let's take a look at the tab
 
 **Visited**: when readings were taken at specific sites.
 
-|id   |site |dated     |
+|id   |site_id |dated     |
 |-----|-----|----------|
 |619  |DR-1 |1927-02-08|
 |622  |DR-1 |1927-02-10|
@@ -153,7 +153,7 @@ The Schema column of this tab informs us about the structures of each table:
  
   > CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real)
  
-  > CREATE TABLE Visited (id text, site text, dated text)
+  > CREATE TABLE Visited (id text, site_id text, dated text)
 
 The Browse Data tab provides view of each table.
 
@@ -235,7 +235,7 @@ The Execute SQL tab is where we'll be entering and executing our SQL commands.
 > CREATE TABLE Person (id text, personal text, family text);
 > CREATE TABLE Site (name text, lat real, long real);
 > CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real);
-> CREATE TABLE Visited (id integer, site text, dated text);
+> CREATE TABLE Visited (id integer, site_id text, dated text);
 > ~~~
 > {: .output}
 >

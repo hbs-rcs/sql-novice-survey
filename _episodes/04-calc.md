@@ -168,11 +168,11 @@ SELECT personal || ' ' || family FROM Person;
 > separated by a '-':
 >
 > ~~~
-> SELECT DISTINCT site FROM Visited;
+> SELECT DISTINCT site_id FROM Visited;
 > ~~~
 > {: .sql}
 >
-> |site |
+> |site_id |
 > |-----|
 > |DR-1 |
 > |DR-3 |
@@ -190,7 +190,7 @@ SELECT personal || ' ' || family FROM Person;
 >
 > > ## Solution
 > > ```
-> > SELECT DISTINCT substr(site, 1, instr(site, '-') - 1) AS MajorSite FROM Visited;
+> > SELECT DISTINCT substr(site_id, 1, instr(site_id, '-') - 1) AS MajorSite FROM Visited;
 > > ```
 > > {: .sql}
 > {: .solution}
