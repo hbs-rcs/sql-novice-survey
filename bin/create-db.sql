@@ -17,4 +17,4 @@ create table Survey (visited_id integer, person_id text, quant text, reading rea
 
 -- Convert empty strings to NULLs.
 UPDATE Visited SET dated = null WHERE dated = '';
-UPDATE Survey SET person = null WHERE person = '';
+UPDATE Survey SET person_id = null WHERE person_id = '';
