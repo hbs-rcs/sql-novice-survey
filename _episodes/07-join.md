@@ -42,7 +42,7 @@ SELECT * FROM Site JOIN Visited;
 ~~~
 {: .sql}
 
-|name |lat   |long   |id   |site_id  |dated     |
+|id |lat   |long   |id   |site_id  |dated     |
 |-----|------|-------|-----|------|----------|
 |DR-1 |-49.85|-128.57|619  |DR-1  |1927-02-08|
 |DR-1 |-49.85|-128.57|622  |DR-1  |1927-02-10|
@@ -90,11 +90,11 @@ we're only interested in combinations that have the same site name,
 thus we need to use a filter:
 
 ~~~
-SELECT * FROM Site JOIN Visited ON Site.name = Visited.site_id;
+SELECT * FROM Site JOIN Visited ON Site.id = Visited.site_id;
 ~~~
 {: .sql}
 
-|name |lat   |long   |id   |site_id |dated     |
+|id |lat   |long   |id   |site_id |dated     |
 |-----|------|-------|-----|-----|----------|
 |DR-1 |-49.85|-128.57|619  |DR-1 |1927-02-08|
 |DR-1 |-49.85|-128.57|622  |DR-1 |1927-02-10|
@@ -130,7 +130,7 @@ out of our join:
 ~~~
 SELECT Site.lat, Site.long, Visited.dated
 FROM   Site JOIN Visited
-ON     Site.name = Visited.site_id;
+ON     Site.id = Visited.site_id;
 ~~~
 {: .sql}
 
@@ -156,7 +156,7 @@ that don't make sense:
 ~~~
 SELECT Site.lat, Site.long, Visited.dated, Survey.quant, Survey.reading
 FROM   Site JOIN Visited JOIN Survey
-ON     Site.name = Visited.site_id
+ON     Site.id = Visited.site_id
 AND    Visited.id = Survey.visited_id
 AND    Visited.dated IS NOT NULL;
 ~~~
@@ -238,9 +238,9 @@ SELECT rowid, * FROM Person;
  > > ~~~
  > > SELECT Survey.reading 
  > > FROM Site JOIN Visited JOIN Survey 
- > > ON Site.name = Visited.site_id
+ > > ON Site.id = Visited.site_id
  > > AND Visited.id = Survey.visited_id
- > > WHERE Site.name = 'DR-1' 
+ > > WHERE Site.id = 'DR-1' 
  > > AND Survey.quant = 'rad';
  > > ~~~
  > > {: .sql}
@@ -259,16 +259,16 @@ SELECT rowid, * FROM Person;
  > > ## Solution
  > > 
  > > ~~~
- > > SELECT DISTINCT Site.name
+ > > SELECT DISTINCT Site.id
  > > FROM Site JOIN Visited JOIN Survey JOIN Person
- > > ON Site.name = Visited.site_id
+ > > ON Site.id = Visited.site_id
  > > AND Visited.id = Survey.visited_id
  > > AND Survey.person_id = Person.id
  > > WHERE Person.personal = 'Frank';
  > > ~~~
  > > {: .sql}
  > >
- > > |name   |
+ > > |id   |
  > > |-------|
  > > |DR-3   |
  > {: .solution}
@@ -279,8 +279,8 @@ SELECT rowid, * FROM Person;
 > Describe in your own words what the following query produces:
 >
 > ~~~
-> SELECT Site.name FROM Site JOIN Visited
-> ON Site.lat <- 49.0 AND Site.name = Visited.site_id AND Visited.dated >= '1932-01-01';
+> SELECT Site.id FROM Site JOIN Visited
+> ON Site.lat <- 49.0 AND Site.id = Visited.site_id AND Visited.dated >= '1932-01-01';
 > ~~~
 > {: .sql}
 {: .challenge}
@@ -294,9 +294,9 @@ SELECT rowid, * FROM Person;
  > > ## Solution
  > > 
  > > ~~~
- > > SELECT Site.name, Site.lat, Site.long, Person.personal, Person.family, Survey.quant, Survey.reading, Visited.dated
+ > > SELECT Site.id, Site.lat, Site.long, Person.personal, Person.family, Survey.quant, Survey.reading, Visited.dated
  > > FROM Site JOIN Visited JOIN Survey JOIN Person
- > > ON Site.name = Visited.site_id
+ > > ON Site.id = Visited.site_id
  > > AND Visited.id = Survey.visited_id
  > > AND Survey.person_id = Person.id
  > > WHERE Survey.person_id IS NOT NULL
@@ -305,7 +305,7 @@ SELECT rowid, * FROM Person;
  > > ~~~
  > > {: .sql}
  > >
- > > name   |  lat        |  long       |  personal   | family   | quant     | reading   |     dated
+ > > id   |  lat        |  long       |  personal   | family   | quant     | reading   |     dated
  > >--------|-------------|-------------|-------------|----------|-----------|-----------|-----------
  > >DR-1    |    -49.85   |   -128.57   |  William    | Dyer     |   rad     |    9.82   |   1927-02-08
  > >DR-1    |    -49.85   |   -128.57   |  William    | Dyer     |   sal     |    0.13   |   1927-02-08

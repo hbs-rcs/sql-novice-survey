@@ -80,7 +80,7 @@ Before we get into using SQLite to select the data, let's take a look at the tab
 
 **Site**: locations where readings were taken.
 
-|name |lat   |long   |
+|id |lat   |long   |
 |-----|------|-------|
 |DR-1 |-49.85|-128.57|
 |DR-3 |-47.15|-126.72|
@@ -149,7 +149,7 @@ The Schema column of this tab informs us about the structures of each table:
 
   > CREATE TABLE Person (id text, personal text, family text)
  
-  > CREATE TABLE Site (name text, lat real, long real)
+  > CREATE TABLE Site (id text, lat real, long real)
  
   > CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real)
  
@@ -233,7 +233,7 @@ The Execute SQL tab is where we'll be entering and executing our SQL commands.
 > {: .sql}
 > ~~~
 > CREATE TABLE Person (id text, personal text, family text);
-> CREATE TABLE Site (name text, lat real, long real);
+> CREATE TABLE Site (id text, lat real, long real);
 > CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real);
 > CREATE TABLE Visited (id integer, site_id text, dated text);
 > ~~~
@@ -384,16 +384,16 @@ SELECT * FROM Person;
 
 > ## Selecting Site Names
 >
-> Write a query that selects only the `name` column from the `Site` table.
+> Write a query that selects only the `id` column from the `Site` table.
 >
 > > ## Solution
 > > 
 > > ~~~
-> > SELECT name FROM Site;
+> > SELECT id FROM Site;
 > > ~~~
 > > {: .sql}
 > >
-> > |name      |
+> > |id      |
 > > |----------|
 > > |DR-1      |
 > > |DR-3      |

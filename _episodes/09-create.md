@@ -32,7 +32,7 @@ the following statements create the four tables in our survey database:
 
 ~~~
 CREATE TABLE Person(id text, personal text, family text);
-CREATE TABLE Site(name text, lat real, long real);
+CREATE TABLE Site(id text, lat real, long real);
 CREATE TABLE Visited(id integer, site_id text, dated text);
 CREATE TABLE Survey(visited_id integer, person_id text, quant text, reading real);
 ~~~
@@ -121,7 +121,7 @@ For example, if we made a mistake when entering the lat and long values
 of the last `INSERT` statement above:
 
 ~~~
-UPDATE Site SET lat = -47.87, long = -122.40 WHERE name = 'MSK-4';
+UPDATE Site SET lat = -47.87, long = -122.40 WHERE id = 'MSK-4';
 ~~~
 {: .sql}
 
