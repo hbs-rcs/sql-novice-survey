@@ -157,7 +157,7 @@ that don't make sense:
 SELECT Site.lat, Site.long, Visited.dated, Survey.quant, Survey.reading
 FROM   Site JOIN Visited JOIN Survey
 ON     Site.name = Visited.site
-AND    Visited.id = Survey.taken
+AND    Visited.id = Survey.visited_id
 AND    Visited.dated IS NOT NULL;
 ~~~
 {: .sql}
@@ -197,7 +197,7 @@ a foreign key is the primary key of one table
 that appears in some other table.
 In our database,
 `Person.id` is the primary key in the `Person` table,
-while `Survey.person` is a foreign key
+while `Survey.person_id` is a foreign key
 relating the `Survey` table's entries
 to entries in `Person`.
 
@@ -239,7 +239,7 @@ SELECT rowid, * FROM Person;
  > > SELECT Survey.reading 
  > > FROM Site JOIN Visited JOIN Survey 
  > > ON Site.name = Visited.site
- > > AND Visited.id = Survey.taken
+ > > AND Visited.id = Survey.visited_id
  > > WHERE Site.name = 'DR-1' 
  > > AND Survey.quant = 'rad';
  > > ~~~
@@ -262,8 +262,8 @@ SELECT rowid, * FROM Person;
  > > SELECT DISTINCT Site.name
  > > FROM Site JOIN Visited JOIN Survey JOIN Person
  > > ON Site.name = Visited.site
- > > AND Visited.id = Survey.taken
- > > AND Survey.person = Person.id
+ > > AND Visited.id = Survey.visited_id
+ > > AND Survey.person_id = Person.id
  > > WHERE Person.personal = 'Frank';
  > > ~~~
  > > {: .sql}
@@ -297,9 +297,9 @@ SELECT rowid, * FROM Person;
  > > SELECT Site.name, Site.lat, Site.long, Person.personal, Person.family, Survey.quant, Survey.reading, Visited.dated
  > > FROM Site JOIN Visited JOIN Survey JOIN Person
  > > ON Site.name = Visited.site
- > > AND Visited.id = Survey.taken
- > > AND Survey.person = Person.id
- > > WHERE Survey.person IS NOT NULL
+ > > AND Visited.id = Survey.visited_id
+ > > AND Survey.person_id = Person.id
+ > > WHERE Survey.person_id IS NOT NULL
  > > AND Visited.dated IS NOT NULL
  > > ORDER BY Visited.dated;
  > > ~~~

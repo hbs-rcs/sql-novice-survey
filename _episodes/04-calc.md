@@ -44,11 +44,11 @@ we can convert temperature readings from Fahrenheit to Celsius
 and round to two decimal places:
 
 ~~~
-SELECT taken, round(5 * (reading - 32) / 9, 2) FROM Survey WHERE quant = 'temp';
+SELECT visited_id, round(5 * (reading - 32) / 9, 2) FROM Survey WHERE quant = 'temp';
 ~~~
 {: .sql}
 
-|taken|round(5*(reading-32)/9, 2)|
+|visited_id|round(5*(reading-32)/9, 2)|
 |-----|--------------------------|
 |734  |-29.72                    |
 |735  |-32.22                    |
@@ -63,11 +63,11 @@ succinctness and clarity. For example, we could write the previous
 query as:
 
 ~~~
-SELECT taken, round(5 * (reading - 32) / 9, 2) as Celsius FROM Survey WHERE quant = 'temp';
+SELECT visited_id, round(5 * (reading - 32) / 9, 2) as Celsius FROM Survey WHERE quant = 'temp';
 ~~~
 {: .sql}
 
-|taken|Celsius|
+|visited_id|Celsius|
 |-----|-------|
 |734  |-29.72 |
 |735  |-32.22 |
@@ -102,11 +102,11 @@ SELECT personal || ' ' || family FROM Person;
 > > ## Solution
 > >
 > > ~~~
-> > SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal';
+> > SELECT visited_id, reading / 100 FROM Survey WHERE person_id = 'roe' AND quant = 'sal';
 > > ~~~
 > > {: .sql}
 > >
-> > |taken     |reading / 100|
+> > |visited_id     |reading / 100|
 > > |----------|-------------|
 > > |752       |0.416        |
 > > |837       |0.225        |
@@ -142,7 +142,7 @@ SELECT personal || ' ' || family FROM Person;
 > have been corrected as described in the previous challenge.
 > The output should be something like:
 >
-> |taken|reading|
+> |visited_id|reading|
 > |-----|-------|
 > |619  |0.13   |
 > |622  |0.09   |
@@ -156,7 +156,7 @@ SELECT personal || ' ' || family FROM Person;
 > > ## Solution
 > >
 > > ~~~
-> > SELECT taken, reading FROM Survey WHERE person != 'roe' AND quant = 'sal' UNION SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal' ORDER BY taken ASC;
+> > SELECT visited_id, reading FROM Survey WHERE person_id != 'roe' AND quant = 'sal' UNION SELECT visited_id, reading / 100 FROM Survey WHERE person_id = 'roe' AND quant = 'sal' ORDER BY visited_id ASC;
 > > ~~~
 > > {: .sql}
 > {: .solution}

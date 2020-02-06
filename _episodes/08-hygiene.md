@@ -34,7 +34,7 @@ The second rule is that every record should have a unique primary key.
 This can be a serial number that has no intrinsic meaning,
 one of the values in the record (like the `id` field in the `Person` table),
 or even a combination of values:
-the triple `(taken, person, quant)` from the `Survey` table uniquely identifies every measurement.
+the triple `(visited_id, person_id, quant)` from the `Survey` table uniquely identifies every measurement.
 
 The third rule is that there should be no redundant information.
 For example,

@@ -4,9 +4,9 @@
 
 -- Generate tables.
 create table Person (id text, personal text, family text);
-create table Site (name text, lat real, long real);
-create table Visited (id text, site text, dated text);
-create table Survey (taken integer, person text, quant text, reading real);
+create table Site (id text, lat real, long real);
+create table Visited (id text, site_id text, dated text);
+create table Survey (visited_id integer, person_id text, quant text, reading real);
 
 -- Import data.
 .mode csv

@@ -97,11 +97,11 @@ If we want to find out what measurements were taken by either Lake or Roerich,
 we can combine the tests on their names using `OR`:
 
 ~~~
-SELECT * FROM Survey WHERE person = 'lake' OR person = 'roe';
+SELECT * FROM Survey WHERE person_id = 'lake' OR person_id = 'roe';
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |734  |lake  |sal  |0.05   |
 |751  |lake  |sal  |0.1    |
@@ -118,11 +118,11 @@ Alternatively,
 we can use `IN` to see if a value is in a specific set:
 
 ~~~
-SELECT * FROM Survey WHERE person IN ('lake', 'roe');
+SELECT * FROM Survey WHERE person_id IN ('lake', 'roe');
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |734  |lake  |sal  |0.05   |
 |751  |lake  |sal  |0.1    |
@@ -141,11 +141,11 @@ If we *don't* use parentheses,
 we get this:
 
 ~~~
-SELECT * FROM Survey WHERE quant = 'sal' AND person = 'lake' OR person = 'roe';
+SELECT * FROM Survey WHERE quant = 'sal' AND person_id = 'lake' OR person_id = 'roe';
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |734  |lake  |sal  |0.05   |
 |751  |lake  |sal  |0.1    |
@@ -160,11 +160,11 @@ and *any* measurement by Roerich.
 We probably want this instead:
 
 ~~~
-SELECT * FROM Survey WHERE quant = 'sal' AND (person = 'lake' OR person = 'roe');
+SELECT * FROM Survey WHERE quant = 'sal' AND (person_id = 'lake' OR person_id = 'roe');
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |734  |lake  |sal  |0.05   |
 |751  |lake  |sal  |0.1    |
@@ -200,11 +200,11 @@ we can use `DISTINCT` with `WHERE`
 to give a second level of filtering:
 
 ~~~
-SELECT DISTINCT person, quant FROM Survey WHERE person = 'lake' OR person = 'roe';
+SELECT DISTINCT person_id, quant FROM Survey WHERE person_id = 'lake' OR person_id = 'roe';
 ~~~
 {: .sql}
 
-|person|quant|
+|person_id|quant|
 |------|-----|
 |lake  |sal  |
 |lake  |rad  |
@@ -277,7 +277,7 @@ not to the entire rows as they are being processed.
 > > ~~~
 > > {: .sql}
 > >
-> > |taken     |person    |quant     |reading   |
+> > |visited_id     |person_id    |quant     |reading   |
 > > |----------|----------|----------|----------|
 > > |752       |roe       |sal       |41.6      |
 > > |837       |roe       |sal       |22.5      |

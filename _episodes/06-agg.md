@@ -119,11 +119,11 @@ We can also combine aggregated results with raw results,
 although the output might surprise you:
 
 ~~~
-SELECT person, count(*) FROM Survey WHERE quant = 'sal' AND reading <= 1.0;
+SELECT person_id, count(*) FROM Survey WHERE quant = 'sal' AND reading <= 1.0;
 ~~~
 {: .sql}
 
-|person|count(\*)|
+|person_id|count(\*)|
 |------|--------|
 |lake  |7       |
 
@@ -141,11 +141,11 @@ aggregation's result is "don't know"
 rather than zero or some other arbitrary value:
 
 ~~~
-SELECT person, max(reading), sum(reading) FROM Survey WHERE quant = 'missing';
+SELECT person_id, max(reading), sum(reading) FROM Survey WHERE quant = 'missing';
 ~~~
 {: .sql}
 
-|person|max(reading)|sum(reading)|
+|person_id|max(reading)|sum(reading)|
 |------|------------|------------|
 |-null-|-null-      |-null-      |
 
@@ -191,13 +191,13 @@ and that some scientists' radiation readings are higher than others.
 We know that this doesn't work:
 
 ~~~
-SELECT person, count(reading), round(avg(reading), 2)
+SELECT person_id, count(reading), round(avg(reading), 2)
 FROM  Survey
 WHERE quant = 'rad';
 ~~~
 {: .sql}
 
-|person|count(reading)|round(avg(reading), 2)|
+|person_id|count(reading)|round(avg(reading), 2)|
 |------|--------------|----------------------|
 |roe   |8             |6.56                  |
 
@@ -207,14 +207,14 @@ Since there are only five scientists,
 we could write five queries of the form:
 
 ~~~
-SELECT person, count(reading), round(avg(reading), 2)
+SELECT person_id, count(reading), round(avg(reading), 2)
 FROM  Survey
 WHERE quant = 'rad'
-AND   person = 'dyer';
+AND   person_id = 'dyer';
 ~~~
 {: .sql}
 
-person|count(reading)|round(avg(reading), 2)|
+person_id|count(reading)|round(avg(reading), 2)|
 ------|--------------|----------------------|
 dyer  |2             |8.81                  |
 
@@ -227,14 +227,14 @@ tell the database manager to aggregate the hours for each scientist separately
 using a `GROUP BY` clause:
 
 ~~~
-SELECT   person, count(reading), round(avg(reading), 2)
+SELECT   person_id, count(reading), round(avg(reading), 2)
 FROM     Survey
 WHERE    quant = 'rad'
-GROUP BY person;
+GROUP BY person_id;
 ~~~
 {: .sql}
 
-person|count(reading)|round(avg(reading), 2)|
+person_id|count(reading)|round(avg(reading), 2)|
 ------|--------------|----------------------|
 dyer  |2             |8.81                  |
 lake  |2             |1.82                  |
@@ -244,7 +244,7 @@ roe   |1             |11.25                 |
 `GROUP BY` does exactly what its name implies:
 groups all the records with the same value for the specified field together
 so that aggregation can process each batch separately.
-Since all the records in each batch have the same value for `person`,
+Since all the records in each batch have the same value for `person_id`,
 it no longer matters that the database manager
 is picking an arbitrary one to display
 alongside the aggregated `reading` values.
@@ -256,13 +256,13 @@ for example,
 we just add another field to the `GROUP BY` clause:
 
 ~~~
-SELECT   person, quant, count(reading), round(avg(reading), 2)
+SELECT   person_id, quant, count(reading), round(avg(reading), 2)
 FROM     Survey
-GROUP BY person, quant;
+GROUP BY person_id, quant;
 ~~~
 {: .sql}
 
-|person|quant|count(reading)|round(avg(reading), 2)|
+|person_id|quant|count(reading)|round(avg(reading), 2)|
 |------|-----|--------------|----------------------|
 |-null-|sal  |1             |0.06                  |
 |-null-|temp |1             |-26.0                 |
@@ -283,15 +283,15 @@ Let's go one step further and remove all the entries
 where we don't know who took the measurement:
 
 ~~~
-SELECT   person, quant, count(reading), round(avg(reading), 2)
+SELECT   person_id, quant, count(reading), round(avg(reading), 2)
 FROM     Survey
-WHERE    person IS NOT NULL
-GROUP BY person, quant
-ORDER BY person, quant;
+WHERE    person_id IS NOT NULL
+GROUP BY person_id, quant
+ORDER BY person_id, quant;
 ~~~
 {: .sql}
 
-|person|quant|count(reading)|round(avg(reading), 2)|
+|person_id|quant|count(reading)|round(avg(reading), 2)|
 |------|-----|--------------|----------------------|
 |dyer  |rad  |2             |8.81                  |
 |dyer  |sal  |2             |0.11                  |
@@ -307,19 +307,19 @@ Looking more closely,
 this query:
 
 1.  selected records from the `Survey` table
-    where the `person` field was not null;
+    where the `person_id` field was not null;
 
 2.  grouped those records into subsets
-    so that the `person` and `quant` values in each subset
+    so that the `person_id` and `quant` values in each subset
     were the same;
 
-3.  ordered those subsets first by `person`,
+3.  ordered those subsets first by `person_id`,
     and then within each sub-group by `quant`;
     and
 
 4.  counted the number of records in each subset,
     calculated the average `reading` in each,
-    and chose a `person` and `quant` value from each
+    and chose a `person_id` and `quant` value from each
     (it doesn't matter which ones,
     since they're all equal).
 
@@ -331,7 +331,7 @@ this query:
 > > ## Solution
 > >
 > > ~~~
-> > SELECT count(reading), avg(reading) FROM Survey WHERE quant = 'temp' AND person = 'pb';
+> > SELECT count(reading), avg(reading) FROM Survey WHERE quant = 'temp' AND person_id = 'pb';
 > > ~~~
 > > {: .sql}
 > >

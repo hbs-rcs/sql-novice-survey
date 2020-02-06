@@ -34,7 +34,7 @@ the following statements create the four tables in our survey database:
 CREATE TABLE Person(id text, personal text, family text);
 CREATE TABLE Site(name text, lat real, long real);
 CREATE TABLE Visited(id integer, site text, dated text);
-CREATE TABLE Survey(taken integer, person text, quant text, reading real);
+CREATE TABLE Survey(visited_id integer, person_id text, quant text, reading real);
 ~~~
 {: .sql}
 
@@ -75,13 +75,13 @@ a better definition for the `Survey` table would be:
 
 ~~~
 CREATE TABLE Survey(
-    taken   integer not null, -- where reading taken
-    person  text,             -- may not know who took it
+    visited_id   integer not null, -- where reading taken
+    person_id  text,             -- may not know who took it
     quant   text not null,    -- the quantity measured
     reading real not null,    -- the actual reading
-    primary key(taken, quant),
-    foreign key(taken) references Visited(id),
-    foreign key(person) references Person(id)
+    primary key(visited_id, quant),
+    foreign key(visited_id) references Visited(id),
+    foreign key(person_id) references Person(id)
 );
 ~~~
 {: .sql}
@@ -146,7 +146,7 @@ But what if we removed Anderson Lake instead?
 Our `Survey` table would still contain seven records
 of measurements he'd taken,
 but that's never supposed to happen:
-`Survey.person` is a foreign key into the `Person` table,
+`Survey.person_id` is a foreign key into the `Person` table,
 and all our queries assume there will be a row in the latter
 matching every value in the former.
 
@@ -179,11 +179,11 @@ this technique is outside the scope of this chapter.
 > ## Replacing NULL
 >
 > Write an SQL statement to replace all uses of `null` in
-> `Survey.person` with the string `'unknown'`.
+> `Survey.person_id` with the string `'unknown'`.
 >
 > > ## Solution
 > > ~~~
-> > UPDATE Survey SET person = 'unknown' WHERE person IS NULL;
+> > UPDATE Survey SET person_id = 'unknown' WHERE person_id IS NULL;
 > > ~~~
 > > {: .sql}
 > {: .solution}
@@ -196,7 +196,7 @@ this technique is outside the scope of this chapter.
 > this:
 >
 > ~~~
-> Taken,Temp
+> visited_id,Temp
 > 619,-21.5
 > 622,-15.5
 > ~~~

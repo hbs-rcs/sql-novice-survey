@@ -154,11 +154,11 @@ that weren't taken by Lake.
 It's natural to write the query like this:
 
 ~~~
-SELECT * FROM Survey WHERE quant = 'sal' AND person != 'lake';
+SELECT * FROM Survey WHERE quant = 'sal' AND person_id != 'lake';
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |619  |dyer  |sal  |0.13   |
 |622  |dyer  |sal  |0.09   |
@@ -168,18 +168,18 @@ SELECT * FROM Survey WHERE quant = 'sal' AND person != 'lake';
 but this query filters omits the records
 where we don't know who took the measurement.
 Once again,
-the reason is that when `person` is `null`,
+the reason is that when `person_id` is `null`,
 the `!=` comparison produces `null`,
 so the record isn't kept in our results.
 If we want to keep these records
 we need to add an explicit check:
 
 ~~~
-SELECT * FROM Survey WHERE quant = 'sal' AND (person != 'lake' OR person IS NULL);
+SELECT * FROM Survey WHERE quant = 'sal' AND (person_id != 'lake' OR person_id IS NULL);
 ~~~
 {: .sql}
 
-|taken|person|quant|reading|
+|visited_id|person_id|quant|reading|
 |-----|------|-----|-------|
 |619  |dyer  |sal  |0.13   |
 |622  |dyer  |sal  |0.09   |

@@ -72,7 +72,7 @@ SELECT DISTINCT quant FROM Survey;
 |sal  |
 |temp |
 
-If we want to determine which visit (stored in the `taken` column)
+If we want to determine which visit (stored in the `visited_id` column)
 have which `quant` measurement,
 we can use the `DISTINCT` keyword on multiple columns.
 If we select more than one column,
@@ -80,11 +80,11 @@ distinct *sets* of values are returned
 (in this case *pairs*, because we are selecting two columns):
 
 ~~~
-SELECT DISTINCT taken, quant FROM Survey;
+SELECT DISTINCT visited_id, quant FROM Survey;
 ~~~
 {: .sql}
 
-|taken|quant|
+|visited_id|quant|
 |-----|-----|
 |619  |rad  |
 |619  |sal  |
@@ -164,16 +164,16 @@ In order to look at which scientist measured quantities during each visit,
 we can look again at the `Survey` table.
 We can also sort on several fields at once.
 For example,
-this query sorts results first in ascending order by `taken`,
-and then in descending order by `person`
-within each group of equal `taken` values:
+this query sorts results first in ascending order by `visited_id`,
+and then in descending order by `person_id`
+within each group of equal `visited_id` values:
 
 ~~~
-SELECT taken, person, quant FROM Survey ORDER BY taken ASC, person DESC;
+SELECT visited_id, person_id, quant FROM Survey ORDER BY visited_id ASC, person_id DESC;
 ~~~
 {: .sql}
 
-|taken|person|quant|
+|visited_id|person_id|quant|
 |-----|------|-----|
 |619  |dyer  |rad  |
 |619  |dyer  |sal  |
@@ -206,11 +206,11 @@ performed which measurements by selecting the appropriate columns and
 removing duplicates.
 
 ~~~
-SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
+SELECT DISTINCT quant, person_id FROM Survey ORDER BY quant ASC;
 ~~~
 {: .sql}
 
-|quant|person|
+|quant|person_id|
 |-----|------|
 |rad  |dyer  |
 |rad  |pb    |

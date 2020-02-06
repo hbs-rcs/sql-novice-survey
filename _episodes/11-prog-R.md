@@ -215,7 +215,7 @@ dbListFields(connection, "Survey")
 ~~~
 {: .r}
 ~~~
-"taken"   "person"  "quant"   "reading"
+"visited_id"   "person_id"  "quant"   "reading"
 ~~~
 {: .output}
 
@@ -355,20 +355,20 @@ src_dbi(connection)
 s
 urvey <- tbl(connection, "Survey")
 survey %>% 
-  select(person, quant, reading) %>% 
+  select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0)
 
 # what did it do?
 survey %>% 
-  select(person, quant, reading) %>% 
+  select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0) %>% 
   show_query()
 
 # collect data
 salinity_readings <- survey %>% 
-  select(person, quant, reading) %>% 
+  select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0)
 salinity_readings
@@ -377,7 +377,7 @@ dbDisconnect(connection)
 
 
 # do a join
-# SELECT * FROM Visited JOIN Survey ON Survey.taken = Visited.id and person = "lake" ORDER BY quant ASC;
+# SELECT * FROM Visited JOIN Survey ON Survey.visited_id = Visited.id and person_id = "lake" ORDER BY quant ASC;
 
 library(dplyr)
 library(dbplyr)
@@ -387,8 +387,8 @@ src_dbi(connection)
 
 survey <- tbl(connection, "Survey")
 both <- left_join(survey, tbl(connection, "Visited"),
-                   by = c("taken" = "id")) %>% 
-  filter(person == "lake") %>%
+                   by = c("visited_id" = "id")) %>% 
+  filter(person_id == "lake") %>%
   arrange(quant)
 both
 explain(both)

@@ -104,29 +104,29 @@ Before we get into using SQLite to select the data, let's take a look at the tab
 
 **Survey**: the actual readings.  The field `quant` is short for quantitative and indicates what is being measured.  Values are `rad`, `sal`, and `temp` referring to 'radiation', 'salinity' and 'temperature', respectively.
 
-|taken|person|quant|reading|
-|-----|------|-----|-------|
-|619  |dyer  |rad  |9.82   |
-|619  |dyer  |sal  |0.13   |
-|622  |dyer  |rad  |7.8    |
-|622  |dyer  |sal  |0.09   |
-|734  |pb    |rad  |8.41   |
-|734  |lake  |sal  |0.05   |
-|734  |pb    |temp |-21.5  |
-|735  |pb    |rad  |7.22   |
-|735  |-null-|sal  |0.06   |
-|735  |-null-|temp |-26.0  |
-|751  |pb    |rad  |4.35   |
-|751  |pb    |temp |-18.5  |
-|751  |lake  |sal  |0.1    |
-|752  |lake  |rad  |2.19   |
-|752  |lake  |sal  |0.09   |
-|752  |lake  |temp |-16.0  |
-|752  |roe   |sal  |41.6   |
-|837  |lake  |rad  |1.46   |
-|837  |lake  |sal  |0.21   |
-|837  |roe   |sal  |22.5   |
-|844  |roe   |rad  |11.25  |
+|visited_id|person_id|quant|reading|
+|----------|------|-----|-------|
+|619       |dyer  |rad  |9.82   |
+|619       |dyer  |sal  |0.13   |
+|622       |dyer  |rad  |7.8    |
+|622       |dyer  |sal  |0.09   |
+|734       |pb    |rad  |8.41   |
+|734       |lake  |sal  |0.05   |
+|734       |pb    |temp |-21.5  |
+|735       |pb    |rad  |7.22   |
+|735       |-null-|sal  |0.06   |
+|735       |-null-|temp |-26.0  |
+|751       |pb    |rad  |4.35   |
+|751       |pb    |temp |-18.5  |
+|751       |lake  |sal  |0.1    |
+|752       |lake  |rad  |2.19   |
+|752       |lake  |sal  |0.09   |
+|752       |lake  |temp |-16.0  |
+|752       |roe   |sal  |41.6   |
+|837       |lake  |rad  |1.46   |
+|837       |lake  |sal  |0.21   |
+|837       |roe   |sal  |22.5   |
+|844       |roe   |rad  |11.25  |
 
   </div>
 </div>
@@ -151,7 +151,7 @@ The Schema column of this tab informs us about the structures of each table:
  
   > CREATE TABLE Site (name text, lat real, long real)
  
-  > CREATE TABLE Survey (taken integer, person text, quant text, reading real)
+  > CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real)
  
   > CREATE TABLE Visited (id text, site text, dated text)
 
@@ -234,7 +234,7 @@ The Execute SQL tab is where we'll be entering and executing our SQL commands.
 > ~~~
 > CREATE TABLE Person (id text, personal text, family text);
 > CREATE TABLE Site (name text, lat real, long real);
-> CREATE TABLE Survey (taken integer, person text, quant text, reading real);
+> CREATE TABLE Survey (visited_id integer, person_id text, quant text, reading real);
 > CREATE TABLE Visited (id integer, site text, dated text);
 > ~~~
 > {: .output}
