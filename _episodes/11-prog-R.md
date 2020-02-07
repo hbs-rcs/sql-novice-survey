@@ -264,16 +264,20 @@ And as always, remember to close the database connection when done!
 dbDisconnect(connection)
 ~~~
 
+## R and dplyr / dbplyr
+
 We're going to try a different approach, one that does not use explicit SQL statements
 and instead uses the more natural syntax of R and dplyr. But we'll show you the comparisons:
 
 **R (standard)**
-You can download [`R_sqlite_dplyr.R`](https://raw.githubusercontent.com/hbs-rcs/datafest/master/DataFest-2020/Custom_Databases_for_Data_Management/scripts/R_sqlite_dplyr.R) to your local machine and put it in your `datafest/` folder.
+You can download [`R_sqlite_dplyr.R`]({{ page.root }}/code/R_sqlite_dplyr.R) to your local machine and put it in your `Desktop/` folder.
 
 
 ```r
 # let's ensure that we have the correct packages loaded
 install.packages(c("RSQLite", "dplyr", "dbplyr"))
+setwd("/Users/(your_username)/Desktop/")
+
 ```
 
 If all goes well, we can proceed:
@@ -283,7 +287,7 @@ If all goes well, we can proceed:
 library('RSQLite')
 
 # open the database connection
-connection <- dbConnect(SQLite(), "~/Desktop/survey.db")
+connection <- dbConnect(SQLite(), "survey.db")
 
 # execute and fetch the results
 results <- dbGetQuery(connection, "SELECT Site.lat, Site.long FROM Site;")
@@ -303,7 +307,7 @@ dbDisconnect(connection)
 library('RSQLite')
 library('dplyr')
 
-connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 
 # execute and fetch the results
 results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
@@ -324,7 +328,7 @@ dbDisconnect(connection)
 library(dplyr)
 library(dbplyr)
 
-connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 
 # sql
@@ -350,7 +354,7 @@ dbDisconnect(connection)
 # Simple query and filter
 # find readings out of range:
 # SELECT * FROM Survey WHERE quant = 'sal' AND ((reading > 1.0) OR (reading < 0.0));
-connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 s
 urvey <- tbl(connection, "Survey")
@@ -382,7 +386,7 @@ dbDisconnect(connection)
 library(dplyr)
 library(dbplyr)
 
-connection <- DBI::dbConnect(RSQLite::SQLite(), "~/Desktop/survey.db")
+connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 
 survey <- tbl(connection, "Survey")
