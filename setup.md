@@ -35,13 +35,13 @@ the using R with SQLite.
 
 1. For Mac or PC, please download to your `Installers` folder the R installer from the [CRAN](https://cran.r-project.org/) site and run it to start the installation process:
 
-    Mac: https://cran.r-project.org/bin/macosx/R-3.6.2.pkg       
-    PC : https://cran.r-project.org/bin/windows/base/R-3.6.2-win.exe     
+    Mac: [https://cran.r-project.org/bin/macosx/R-3.6.2.pkg](https://cran.r-project.org/bin/macosx/R-3.6.2.pkg)       
+    PC : [https://cran.r-project.org/bin/windows/base/R-3.6.2-win.exe](https://cran.r-project.org/bin/windows/base/R-3.6.2-win.exe)       
 
 2. For Mac or PC, please download to your `Installers` folder the RStudio installer from the [RStudio](https://www.rstudio.com/) site and run it to start the installation process:
 
-    Mac: https://download1.rstudio.org/desktop/macos/RStudio-1.2.5033.dmg       
-    PC : https://download1.rstudio.org/desktop/windows/RStudio-1.2.5033.exe     
+    Mac: [https://download1.rstudio.org/desktop/macos/RStudio-1.2.5033.dmg](https://download1.rstudio.org/desktop/macos/RStudio-1.2.5033.dmg)       
+    PC : [https://download1.rstudio.org/desktop/windows/RStudio-1.2.5033.exe](https://download1.rstudio.org/desktop/windows/RStudio-1.2.5033.exe)       
 
 
 3. Final step is to install the R packages needed for the workshop. Open up the RStudio
