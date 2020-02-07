@@ -267,22 +267,25 @@ dbDisconnect(connection)
 ## R and dplyr / dbplyr
 
 We're going to try a different approach, one that does not use explicit SQL statements
-and instead uses the more natural syntax of R and dplyr. But we'll show you the comparisons:
+and instead uses the more natural syntax of R and dplyr. But we'll show you the comparisons.
+You can download [`R_sqlite_dplyr.R`]({{ page.root }}/code/R_sqlite_dplyr.R) to your local machine
+and put it in your `Desktop/` folder.
 
-**R (standard)**
-You can download [`R_sqlite_dplyr.R`]({{ page.root }}/code/R_sqlite_dplyr.R) to your local machine and put it in your `Desktop/` folder.
-
+**Setup**: Some initial configuration is needed:
 
 ```r
-# let's ensure that we have the correct packages loaded
+## let's ensure that we have the correct packages loaded
+# and set the appropriate working directory
 install.packages(c("RSQLite", "dplyr", "dbplyr"))
 setwd("/Users/(your_username)/Desktop/")
 
 ```
+If all goes well, we can proceed...
 
-If all goes well, we can proceed:
+**Standard R and SQL**: We'll issue an SQL statement to the database in R to gather our data:
 
 ```r
+### Standard SQL
 # import our required packages
 library('RSQLite')
 
@@ -297,91 +300,106 @@ print(results)
 
 # close the connection
 dbDisconnect(connection)
+
 ```
 
-**R with dplyr**
+Well, that was fun. But let's do it a little differently...
+
+**R with dplyr**: Let's use dplyr verbs to work with our data and the database,
+but we are still doing SQL:
+
 ```r
-#
-# somewhat using dplyr
+### Somewhat using dplyr
 # import our required packages
-library('RSQLite')
 library('dplyr')
 
+# create connection with RSQLite driver
 connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 
 # execute and fetch the results
 results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
 
-# print 'em out
+# print 'em out & close connection
 print(results)
+DBI::dbConnect(connection)
 
-# close the connection
-dbDisconnect(connection)
 ```
 
-**R with dplyr and dbplyr**
+You'll notie the results are somewhat truncated (we're working on this).
+But we have them just the same.
+
+**R with dplyr and dbplyr**: Now let's show SQL vs dplyr verbs:
 ```r
-## better examples
-# real dplyr with dbplyr
-#
+### Real dplyr with dbplyr
 #
 library(dplyr)
 library(dbplyr)
 
+# open a connection and give us information about it
 connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 
-# sql
+# SQL approach, seeing what the data is and the data structure (messy)
 results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
 results
 str(results)
 
-# dplyr
+# dplyr approach, see data structure and use pipes
 sites <- tbl(connection, "Site")
 str(sites)
-
 sites %>% 
   select(lat, long)
-sites
 
+# see the SQL generated and disconnect
 sites %>% 
   select(lat, long) %>%
   show_query()
-  
-dbDisconnect(connection)
+DBI::dbDisconnect(connection)
+```
 
+Here we used native dplyr vers to specify the table and to filter data. Much nicer!
+And we can continue with more complex queries:
 
-# Simple query and filter
+```r
+## Simple query and filter
+#
 # find readings out of range:
 # SELECT * FROM Survey WHERE quant = 'sal' AND ((reading > 1.0) OR (reading < 0.0));
+
+
 connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
-s
-urvey <- tbl(connection, "Survey")
+
+# now do our query...
+survey <- tbl(connection, "Survey")
 survey %>% 
   select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0)
 
-# what did it do?
+# what did it do? show us the SQL
 survey %>% 
   select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0) %>% 
   show_query()
 
-# collect data
+# collect our data, print it, and disconnect
 salinity_readings <- survey %>% 
   select(person_id, quant, reading) %>% 
   filter(quant == 'sal',
          reading > 1 | reading < 0)
 salinity_readings
+DBI::dbDisconnect(connection)
+```
 
-dbDisconnect(connection)
+Wow! Isn't that nice? Let's try a join:
 
-
-# do a join
-# SELECT * FROM Visited JOIN Survey ON Survey.visited_id = Visited.id and person_id = "lake" ORDER BY quant ASC;
+```r
+## Do a join
+#
+# SELECT * FROM Visited JOIN Survey 
+# ON Survey.taken = Visited.id and person = "lake" ORDER BY quant ASC;
 
 library(dplyr)
 library(dbplyr)
@@ -389,19 +407,23 @@ library(dbplyr)
 connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 
+# now join Survey to other table Visit, identifying ties, then continue filter...
 survey <- tbl(connection, "Survey")
 both <- left_join(survey, tbl(connection, "Visited"),
                    by = c("visited_id" = "id")) %>% 
   filter(person_id == "lake") %>%
   arrange(quant)
 both
-explain(both)
 
-dbDisconnect(connection)
+# tell us what happened, and exit
+explain(both)
+DBI::dbDisconnect(connection)
+
 ```
 
 We hope that you see that using native R dplyr syntax is much easier and more natural than
-explicit SQL queries for routine and lightweight work.
+explicit SQL queries for routine and lightweight work. Feel free to explore the
+documentation for [dply](https://dplyr.tidyverse.org/) and [dbplyr](https://dbplyr.tidyverse.org/).
 
 {: .r}
 
