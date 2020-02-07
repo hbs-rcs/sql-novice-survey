@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 23.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 279.4 391.7" style="enable-background:new 0 0 279.4 391.7;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:1.3333;stroke-miterlimit:5.3333;}
-	.st1{fill:none;stroke:#000000;stroke-width:1.3333;stroke-miterlimit:5.3333;}
+	.st0{fill:#FFFFFF;stroke:#FFFFFF;stroke-width:1.7777;stroke-miterlimit:7.111;}
+	.st1{fill:none;stroke:#000000;stroke-width:1.7777;stroke-miterlimit:7.111;}
 	.st2{font-family:'ArialMT';}
 	.st3{font-size:11.9575px;}
-	.st4{stroke:#000000;stroke-width:1.3333;stroke-miterlimit:5.3333;}
+	.st4{stroke:#000000;stroke-width:1.7777;stroke-miterlimit:7.111;}
 </style>
 <g id="graph0" transform="scale(1.33333 1.33333) rotate(0) translate(4 388)">
 	<title>G</title>
@@ -15,40 +15,40 @@
 	<g id="node1">
 		<title>Person</title>
 		<polygon class="st1" points="-1,-214.6 -1,-286.4 75.6,-286.4 75.6,-214.6 		"/>
-		<text transform="matrix(0.7536 0 0 0.75 23.0268 -272.9091)" class="st2 st3">Person</text>
+		<text transform="matrix(0.7536 0 0 0.75 23.0264 -272.9091)" class="st2 st3">Person</text>
 		<line class="st1" x1="-1" y1="-268.4" x2="75.6" y2="-268.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 15.7732 -254.9728)" class="st2 st3">id</text>
+		<text transform="matrix(0.7536 0 0 0.75 15.7725 -254.9728)" class="st2 st3">id</text>
 		<line class="st1" x1="39.6" y1="-250.5" x2="39.6" y2="-268.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 50.3169 -254.9728)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 50.3165 -254.9728)" class="st2 st3">text</text>
 		<line class="st1" x1="-1" y1="-250.5" x2="75.6" y2="-250.5"/>
-		<text transform="matrix(0.7536 0 0 0.75 5.7511 -237.0365)" class="st2 st3">personal</text>
+		<text transform="matrix(0.7536 0 0 0.75 5.7508 -237.0365)" class="st2 st3">personal</text>
 		<line class="st1" x1="47.1" y1="-232.6" x2="47.1" y2="-250.5"/>
-		<text transform="matrix(0.7536 0 0 0.75 54.072 -237.0365)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 54.0713 -237.0365)" class="st2 st3">text</text>
 		<line class="st1" x1="-1" y1="-232.6" x2="75.6" y2="-232.6"/>
-		<text transform="matrix(0.7536 0 0 0.75 8.2648 -219.1002)" class="st2 st3">family</text>
+		<text transform="matrix(0.7536 0 0 0.75 8.2644 -219.1002)" class="st2 st3">family</text>
 		<line class="st1" x1="41.8" y1="-214.6" x2="41.8" y2="-232.6"/>
-		<text transform="matrix(0.7536 0 0 0.75 51.068 -219.1002)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 51.0676 -219.1002)" class="st2 st3">text</text>
 	</g>
 	<g id="node4">
 		<title>Survey</title>
 		<polygon class="st1" points="125.4,-97.5 125.4,-187.2 202.7,-187.2 202.7,-97.5 		"/>
-		<text transform="matrix(0.7536 0 0 0.75 149.6303 -173.6987)" class="st2 st3">Survey</text>
+		<text transform="matrix(0.7536 0 0 0.75 149.6299 -173.6987)" class="st2 st3">Survey</text>
 		<line class="st1" x1="125.4" y1="-169.2" x2="202.7" y2="-169.2"/>
-		<text transform="matrix(0.7536 0 0 0.75 126.7845 -155.7631)" class="st2 st3">visited_id</text>
+		<text transform="matrix(0.7536 0 0 0.75 126.7841 -155.7631)" class="st2 st3">visited_id</text>
 		<line class="st1" x1="166.3" y1="-151.1" x2="166.3" y2="-169.1"/>
-		<text transform="matrix(0.7536 0 0 0.75 167.8998 -155.7631)" class="st2 st3">integer</text>
+		<text transform="matrix(0.7536 0 0 0.75 167.8991 -155.7631)" class="st2 st3">integer</text>
 		<line class="st1" x1="125.4" y1="-151.3" x2="202.7" y2="-151.3"/>
-		<text transform="matrix(0.7536 0 0 0.75 127.911 -137.826)" class="st2 st3">person_id</text>
+		<text transform="matrix(0.7536 0 0 0.75 127.9106 -137.826)" class="st2 st3">person_id</text>
 		<line class="st1" x1="170.4" y1="-133.3" x2="170.4" y2="-151.3"/>
-		<text transform="matrix(0.7536 0 0 0.75 178.9206 -137.826)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 178.9199 -137.826)" class="st2 st3">text</text>
 		<line class="st1" x1="125.4" y1="-133.3" x2="202.7" y2="-133.3"/>
-		<text transform="matrix(0.7536 0 0 0.75 135.1063 -119.8904)" class="st2 st3">quant</text>
+		<text transform="matrix(0.7536 0 0 0.75 135.1059 -119.8904)" class="st2 st3">quant</text>
 		<line class="st1" x1="167.4" y1="-115.4" x2="167.4" y2="-133.3"/>
-		<text transform="matrix(0.7536 0 0 0.75 177.4184 -119.8904)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 177.4181 -119.8904)" class="st2 st3">text</text>
 		<line class="st1" x1="125.4" y1="-115.4" x2="202.7" y2="-115.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 133.6034 -101.9534)" class="st2 st3">reading</text>
+		<text transform="matrix(0.7536 0 0 0.75 133.603 -101.9534)" class="st2 st3">reading</text>
 		<line class="st1" x1="171.9" y1="-97.5" x2="171.9" y2="-115.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 179.4209 -101.9534)" class="st2 st3">real</text>
+		<text transform="matrix(0.7536 0 0 0.75 179.4205 -101.9534)" class="st2 st3">real</text>
 	</g>
 	<g id="edge6">
 		<title>Person-&gt;Survey</title>
@@ -58,36 +58,36 @@
 	<g id="node2">
 		<title>Site</title>
 		<polygon class="st1" points="38.8,-313.3 38.8,-385 102.6,-385 102.6,-313.3 		"/>
-		<text transform="matrix(0.7536 0 0 0.75 62.5821 -371.5585)" class="st2 st3">Site</text>
+		<text transform="matrix(0.7536 0 0 0.75 62.5817 -371.5585)" class="st2 st3">Site</text>
 		<line class="st1" x1="38.8" y1="-367.1" x2="102.6" y2="-367.1"/>
-		<text transform="matrix(0.7536 0 0 0.75 44.8065 -353.6222)" class="st2 st3">  id</text>
+		<text transform="matrix(0.7536 0 0 0.75 44.8062 -353.6222)" class="st2 st3">  id</text>
 		<line class="st1" x1="74.1" y1="-349.1" x2="74.1" y2="-367.1"/>
-		<text transform="matrix(0.7536 0 0 0.75 81.1069 -353.6222)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 81.1065 -353.6222)" class="st2 st3">text</text>
 		<line class="st1" x1="38.8" y1="-349.1" x2="102.6" y2="-349.1"/>
-		<text transform="matrix(0.7536 0 0 0.75 48.3148 -335.6859)" class="st2 st3">lat</text>
+		<text transform="matrix(0.7536 0 0 0.75 48.3145 -335.6859)" class="st2 st3">lat</text>
 		<line class="st1" x1="67.3" y1="-331.2" x2="67.3" y2="-349.1"/>
-		<text transform="matrix(0.7536 0 0 0.75 77.1013 -335.6859)" class="st2 st3">real</text>
+		<text transform="matrix(0.7536 0 0 0.75 77.1009 -335.6859)" class="st2 st3">real</text>
 		<line class="st1" x1="38.8" y1="-331.2" x2="102.6" y2="-331.2"/>
-		<text transform="matrix(0.7536 0 0 0.75 46.8079 -317.7496)" class="st2 st3">long</text>
+		<text transform="matrix(0.7536 0 0 0.75 46.8075 -317.7496)" class="st2 st3">long</text>
 		<line class="st1" x1="71.8" y1="-313.3" x2="71.8" y2="-331.2"/>
-		<text transform="matrix(0.7536 0 0 0.75 79.3542 -317.7496)" class="st2 st3">real</text>
+		<text transform="matrix(0.7536 0 0 0.75 79.3538 -317.7496)" class="st2 st3">real</text>
 	</g>
 	<g id="node3">
 		<title>Visited</title>
 		<polygon class="st1" points="102.6,-214.6 102.6,-286.4 177,-286.4 177,-214.6 		"/>
-		<text transform="matrix(0.7536 0 0 0.75 125.9928 -272.9091)" class="st2 st3">Visited</text>
+		<text transform="matrix(0.7536 0 0 0.75 125.9924 -272.9091)" class="st2 st3">Visited</text>
 		<line class="st1" x1="102.6" y1="-268.4" x2="177" y2="-268.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 115.6517 -254.9728)" class="st2 st3">id</text>
+		<text transform="matrix(0.7536 0 0 0.75 115.6513 -254.9728)" class="st2 st3">id</text>
 		<line class="st1" x1="135.7" y1="-250.5" x2="135.7" y2="-268.4"/>
-		<text transform="matrix(0.7536 0 0 0.75 142.1793 -254.9728)" class="st2 st3">integer</text>
+		<text transform="matrix(0.7536 0 0 0.75 142.179 -254.9728)" class="st2 st3">integer</text>
 		<line class="st1" x1="102.6" y1="-250.5" x2="177" y2="-250.5"/>
-		<text transform="matrix(0.7536 0 0 0.75 113.6492 -237.0365)" class="st2 st3">site</text>
+		<text transform="matrix(0.7536 0 0 0.75 108.207 -237.0365)" class="st2 st3">site_id</text>
 		<line class="st1" x1="138.7" y1="-232.6" x2="138.7" y2="-250.5"/>
-		<text transform="matrix(0.7536 0 0 0.75 150.1957 -237.0365)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 150.1953 -237.0365)" class="st2 st3">text</text>
 		<line class="st1" x1="102.6" y1="-232.6" x2="177" y2="-232.6"/>
-		<text transform="matrix(0.7536 0 0 0.75 111.6387 -219.1002)" class="st2 st3">dated</text>
+		<text transform="matrix(0.7536 0 0 0.75 111.6384 -219.1002)" class="st2 st3">dated</text>
 		<line class="st1" x1="143.2" y1="-214.6" x2="143.2" y2="-232.6"/>
-		<text transform="matrix(0.7536 0 0 0.75 152.4486 -219.1002)" class="st2 st3">text</text>
+		<text transform="matrix(0.7536 0 0 0.75 152.4479 -219.1002)" class="st2 st3">text</text>
 	</g>
 	<g id="edge2">
 		<title>Site-&gt;Visited</title>
