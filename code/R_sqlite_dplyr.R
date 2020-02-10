@@ -42,7 +42,7 @@ results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
 print(results)
 
 # close the connection
-dbDisconnect(connection)
+DBI::dbConnect(connection)
 
 
 
@@ -56,7 +56,7 @@ library(dbplyr)
 connection <- DBI::dbConnect(RSQLite::SQLite(), "survey.db")
 src_dbi(connection)
 
-# sql approach, seeing what the data is and the data structure
+# SQL approach, seeing what the data is and the data structure
 results <- tbl(connection, sql("SELECT Site.lat, Site.long FROM Site"))
 results
 str(results)
